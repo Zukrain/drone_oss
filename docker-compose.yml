@@ -7,12 +7,16 @@ services:
     ports:
       - "80:80"
     volumes:
+      - /etc/docker-compose.d/drone/ssl:/etc/ssl       
       - /var/lib/drone:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/root/.docker/config.json  
     restart: always
     environment:
       - DRONE_LOGS_DEBUG=true
       - DRONE_SERVER_HOST={HOSTNAME}
       - DRONE_SERVER_PROTO=http
+      - DRONE_RUNNER_VOLUMES=/etc/docker-compose.d/drone/ssl/CA.crt:/etc/ssl/certs/ca-certificates.crt  
       - DRONE_RPC_SECRET={SECRET}
       - DRONE_GITLAB_SERVER={GITLAB HOSTNAME}
       - DRONE_GITLAB_CLIENT_ID={GITLAB ID}

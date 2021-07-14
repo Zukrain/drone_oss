@@ -44,3 +44,7 @@
     ln -s /etc/systemd/system/drone.service drone.service
     systemctl daemon-reload
     systemctl start drone.service
+
+### Использование самоподписанного сертификата
+Если для gitlab используется самоподписанный сертификат, тогда нужно его прокинуть в контейнер для возможности
+клонирования репозиторием. Для этого в docker-compose.yml добавлены парметры тома сертификата и опция `DRONE_RUNNER_VOLUMES`
