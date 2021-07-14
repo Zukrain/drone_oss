@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  drone:
+    image: zukrain/drone-oss:latest
+    container_name: drone
+    ports:
+      - "80:80"
+    volumes:
+      - /var/lib/drone:/data
+    restart: always
+    environment:
+      - DRONE_LOGS_DEBUG=true
+      - DRONE_SERVER_HOST={HOSTNAME}
+      - DRONE_SERVER_PROTO=http
+      - DRONE_RPC_SECRET={SECRET}
+      - DRONE_GITLAB_SERVER={GITLAB HOSTNAME}
+      - DRONE_GITLAB_CLIENT_ID={GITLAB ID}
+      - DRONE_GITLAB_CLIENT_SECRET={GITLAB SECRET}
+      - DRONE_GITLAB_SKIP_VERIFY=true
+      - DRONE_USER_CREATE=username:root,machine:true,admin:true,token:{token}
